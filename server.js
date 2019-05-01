@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Router - points our server to a series of "route" files.
 
-// require("./app/routing/apiRoutes")(app);
+require("./app/routing/apiRoutes")(app);
 require("./app/routing/htmlRoutes")(app);
 
 // Listener
