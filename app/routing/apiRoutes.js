@@ -37,14 +37,17 @@ module.exports = function (app) {
             }
         }
 
-        // Add our user to the array of friends for the next user
-        friendData.push(newFriend);
 
         // Save the user who is the best match to send to back to the html
         var closestFriend = {
             name: chosenFriendName,
             photo: chosenFriendPhoto
         }
+
+        // Add our user to the array of friends for the next user
+        friendData.push(newFriend);
+
         console.log(closestFriend);
+        res.json(closestFriend);
     });
 };
