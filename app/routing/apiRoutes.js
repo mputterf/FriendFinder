@@ -13,7 +13,7 @@ module.exports = function (app) {
         console.log(newFriend);
 
         // Initial placeholder values
-        var smallestDifference = 100;
+        var smallestDifference = 1000;
         var chosenFriendName = "";
         var chosenFriendPhoto = "";
 
@@ -23,21 +23,24 @@ module.exports = function (app) {
             var friendDataScores = friendData[i].scores;
             var totalDifference = 0;
 
-            // Compare the friend's scores against the user by going through each array and taking the difference of each element.
-            // Store the total difference of all the scores to later compare against whoever has the lest difference in total score
-            friendDataScores.forEach((e1) => newFriend.scores.forEach((e2) =>
-                totalDifference += Math.abs(parseInt(e1) - parseInt(e2))
-            ));
 
+            // Go through the friend's scores and find the total difference for each friend
+            for (var j = 0; j < friendDataScores.length; j++) {
+                console.log(friendDataScores[j], newFriend.scores[j]);
+                totalDifference += Math.abs(parseInt(friendDataScores[j]) - parseInt(newFriend.scores[j]));
+            }
+
+            console.log("=====");
             // If a friend has smaller difference comapred to whoever had the smallest, we'll make them the new chosen one
-            if (totalDifference < smallestDifference) {
+            if (totalDifference <= smallestDifference) {
                 chosenFriendName = friendData[i].name;
                 chosenFriendPhoto = friendData[i].photo;
                 smallestDifference = totalDifference;
+                console.log(chosenFriendName);
             }
         }
 
-
+        console.log(totalDifference);
         // Save the user who is the best match to send to back to the html
         var closestFriend = {
             name: chosenFriendName,
